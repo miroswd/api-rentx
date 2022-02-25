@@ -1,3 +1,4 @@
+# Chapter 2 - Ignite Node.js
 
 ## Using TS
 
@@ -36,9 +37,6 @@ yarn add -D ts-node-dev
 
 ```json
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -59,22 +57,21 @@ yarn add -D ts-node-dev
 - Need insert `--inspect` to script dev in package.json
 
 
-## Application
+# Creating the app
 
 <img src="https://xesque.rocketseat.dev/1571029149847-attachment.png" />
 
 
-### Repositories
+## Repositories
 
 - Camada responsável por fazer toda a manipulação de dados da nossa aplicação
 
 - Responsável por acessar o banco, editar, criar
 
 
-DTO => Date Transfer Object
+### DTO => Date Transfer Object
 
 - As rotas não devem conhecer a Model, quem deve conhecer são os repositórios
-
 - DTO -> Receber os dados das rotas e receber nos repositórios
 
 
