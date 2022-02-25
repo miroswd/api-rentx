@@ -74,4 +74,62 @@ yarn add -D ts-node-dev
 - As rotas não devem conhecer a Model, quem deve conhecer são os repositórios
 - DTO -> Receber os dados das rotas e receber nos repositórios
 
+## SOLID
 
+- Conceito de código limpo
+
+S -> SRP - Single Responsability Principle
+O -> OCP - Open-Closed Principle
+L -> LSP - Liskov Substitution Principle
+I -> ISP - Interface Segregation Principle 
+D -> DIP - Dependency Inversion Principle
+
+### Single Responsability Principle
+
+- Cada rota deve ter uma única responsabilidade
+
+Olhando para a rota de criação de categoria:
+
+```ts
+categoriesRoutes.post("/", (request, response) => {
+  const { name, description } = request.body;
+
+  const categoryAlreadyExists = categoriesRepository.findByName(name);
+
+  if (categoryAlreadyExists) {
+    return response.status(400).json({
+      error: "Category already exists",
+    });
+  }
+
+  categoriesRepository.create({ name, description });
+
+  return response.status(201).json({ success: true });
+});
+```
+
+temos a responsabilidade de validar se a categoria já existe e de criar
+
+
+- Devemos isolar a lógica da rota em um service, para que seja possível cadastrar a categoria, separando a responsabilidade do contexto
+
+### Dependency Inversion Principle
+
+Olhando pra esse código:
+
+```ts
+class CreateCategoryService {
+  execute({ name, description }: IRequest) {
+    const categoriesRepository = new CategoriesRepository();
+  }
+}
+```
+
+- Imaginando que nós temos 3 classes: list, create e delete, todas elas instanciando o `CategoriesRepository`, logo teríamos um novo repositório e nunca usaríamos a mesma instância do repositório
+
+- O código q implementa uma política de alto nível, não deve depender de um código q implementa detalhes de baixo nível, ou seja, o `service` (alto nível - mais próximo do domínio) não deve conhecer o tipo do `repositório`. As rotas são os de baixo nível, pois estão mais perto do contato com o usuário
+
+- A responsabilidade passa a ser de quem chama o service
+
+- [x] Tirar a responsabilidade da rota de fazer a regra de negócio (responsabilidade da rota: receber a request, chamar o serviço, executar a função para retornar algo)
+- [x] Separar a responsabilidade em um serviço, para criar uma categoria
