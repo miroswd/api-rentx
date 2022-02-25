@@ -1,6 +1,6 @@
 // o service não deve conhecer o request, ele precisa só dos dados
 
-import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { ICategoriesRepository } from "../repositories/ICategoriesRepository";
 
 interface IRequest {
   name: string;
@@ -13,7 +13,7 @@ interface IRequest {
  * [x] - Acessar o repositorio
  */
 class CreateCategoryService {
-  constructor(private categoriesRepository: CategoriesRepository) {}
+  constructor(private categoriesRepository: ICategoriesRepository) {}
 
   execute({ name, description }: IRequest): void {
     // const categoriesRepository = new CategoriesRepository();

@@ -133,3 +133,35 @@ class CreateCategoryService {
 
 - [x] Tirar a responsabilidade da rota de fazer a regra de negócio (responsabilidade da rota: receber a request, chamar o serviço, executar a função para retornar algo)
 - [x] Separar a responsabilidade em um serviço, para criar uma categoria
+
+
+### Liskov Substitution Principle
+
+- Permitir que as partes do programa seja substituído sem que tenha impacto
+
+
+```ts
+interface ICategoriesRepository {
+  findByName(name: string): Category;
+  list(): Category[];
+  create({ name, description }: ICreateCategoryDTO): void;
+}
+```
+
+- Basta que os repositórios recebam o mesmo contrato (interface)
+
+- O repositório se torna um subtipo da interface
+
+```ts
+// Antes
+class CreateCategoryService {
+  constructor(private categoriesRepository: CategoriesRepository) {}
+}
+
+// Depois
+class CreateCategoryService {
+  constructor(private categoriesRepository: ICategoriesRepository) {}
+}
+```
+
+- Ao invés de receber o repositório, travando o service, agora a gente recebe a interface, removendo a definição do tipo que a gente esperava no `constructor` e agora utiliza o subtipo. Qualquer classe que implementar a interface, pode ser implementada nas routes e substituir q vai continuar funcionando
