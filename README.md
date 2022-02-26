@@ -165,3 +165,13 @@ class CreateCategoryService {
 ```
 
 - Ao invés de receber o repositório, travando o service, agora a gente recebe a interface, removendo a definição do tipo que a gente esperava no `constructor` e agora utiliza o subtipo. Qualquer classe que implementar a interface, pode ser implementada nas routes e substituir q vai continuar funcionando
+
+
+## Use Cases (regras de negócio)
+
+- Separação de operações (separar arquivos de criação de categoria, listagem de categoria, criação de especificação, etc)
+
+### Controllers
+
+- Classes que recebem nossa requisição e retornam a resposta pra quem está chamando elas
+
