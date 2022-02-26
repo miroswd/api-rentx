@@ -2,17 +2,17 @@
 
 ## Using TS
 
-```
+```bash
 yarn add typescript -D 
 ```
 
-```
+```bash
 yarn tsc --init # init ts
 ```
 
 - TSC transpile ts to js
 
-```
+```bash
 yarn tsc
 ```
 
@@ -26,7 +26,7 @@ yarn tsc
 
 ## Watch APP
 
-```
+```bash
 yarn add -D ts-node-dev
 ```
 
@@ -192,7 +192,7 @@ private static INSTANCE: CategoriesRepository;
 
 ### Upload de arquivos
 
-```ts
+```bash
 yarn add multer # lib para leitura de arquivos
 ```
 
@@ -211,3 +211,32 @@ yarn add multer # lib para leitura de arquivos
 - Conceito de stream: permite ler o arquivo em partes (chunks)
 
 - `pipe`, pega as informações e passa pra algum lugar
+
+
+### Swagger
+
+- O back-end deve ser desenvolvido pensando em quem vai consumir ele, por isso é importante ter uma documentação
+
+
+```bash
+yarn add swagger-ui-express && yarn add -D @types/swagger-ui-express
+```
+
+no arquivo server da aplicação
+
+```js
+/**
+ * "/api-docs" -> rota pra acessar a documentação
+ *  swagger.serve -> chamando o servidor
+ *  swagger.setup() -> arquivo json com todas as informações da nossa aplicação, toda a parte de documentação
+ */
+app.use("/api-docs", swagger.serve, swagger.setup()); 
+```
+
+liberando a importação de json na aplicação
+// tsconfig
+```json
+{
+  "resolveJsonModule": true
+}
+```
