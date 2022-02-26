@@ -175,3 +175,16 @@ class CreateCategoryService {
 
 - Classes que recebem nossa requisição e retornam a resposta pra quem está chamando elas
 
+### SingleTon Pattern
+
+- Criando apenas uma instância global
+- Ponto de atenção: verificar se a instância deve ser única em todo o projeto
+
+no arquivo CategoriesRepository.ts:
+
+```ts
+private static INSTANCE: CategoriesRepository;
+
+```
+
+- somente a class `CategoriesRepository` vai poder criar a instância
