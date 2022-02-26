@@ -1,11 +1,20 @@
-import { Specification } from "../model/Specification";
-import { ICreateCategoryDTO } from "./ICategoriesRepository";
+import { Specification } from "../../model/Specification";
+import { ICreateCategoryDTO } from "../ICategoriesRepository";
 
 class SpecificationsRepository {
   private specifications: Specification[];
 
-  constructor() {
+  private static INSTANCE: SpecificationsRepository;
+
+  private constructor() {
     this.specifications = [];
+  }
+
+  public static getInstance(): SpecificationsRepository {
+    if (!SpecificationsRepository.INSTANCE) {
+      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
+    }
+    return SpecificationsRepository.INSTANCE;
   }
 
   create({ name, description }: ICreateCategoryDTO) {
