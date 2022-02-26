@@ -188,3 +188,26 @@ private static INSTANCE: CategoriesRepository;
 ```
 
 - somente a class `CategoriesRepository` vai poder criar a instância
+
+
+### Upload de arquivos
+
+```ts
+yarn add multer # lib para leitura de arquivos
+```
+
+// TODO =
+
+1. Receber o arquivo de upload
+2. Armazenar em uma pasta temporária
+3. Fazer a leitura desses arquivos
+4. Deletar os arquivos dessa pasta
+
+
+### Stram
+
+- `ReadFile` faz a leitura de uma vez do arquivo, se o arquivo tiver muitas linhas, será uma leitura pesada e a aplicação começa a consumir muita memória do servidor
+
+- Conceito de stream: permite ler o arquivo em partes (chunks)
+
+- `pipe`, pega as informações e passa pra algum lugar
