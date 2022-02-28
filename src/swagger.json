@@ -59,8 +59,8 @@
         }
       },
       "get": {
-        "tag": ["Category"],
-        "sumary":"List all categories",
+        "tags": ["Category"],
+        "summary":"List all categories",
         "description": "List all categories",
         "responses": {
           "200": {
