@@ -240,3 +240,102 @@ liberando a importação de json na aplicação
   "resolveJsonModule": true
 }
 ```
+
+
+## Docker
+
+### run application in docker
+
+- Instalando as ferramentas e configurando tudo no docker
+
+- Criar o arquivo `Dockerfile`, que terá todo o passo a passo para rodar a aplicação dentro do docker
+
+Imagens do docker [Hub Docker](https://hub.docker.com/search?q=node&type=image)
+
+
+```Dockerfile
+FROM node:latest # de qual imagem vai rodar
+
+
+WORKDIR /path # diretório q as informações estão contidas
+
+
+COPY package.json ./ # copiando o package pro workdir
+
+
+RUN npm install # nem sempre as imagens vem com o yarn instalado
+
+
+COPY . . # copiando tudo, para a pasta raíz
+
+EXPOSE 3333
+
+CMD ["npm", "run", "dev"] # comandos a serem rodados, precisa ser em itens do array
+```
+
+Rodando o **Dockerfile**:
+
+```shell
+docker build -t nome_da_imagem_a_ser_criada . # . -> raiz do projeto
+```
+
+**Rodando o container**:
+
+```shell
+docker run -p 3333:3333 nome_da_imagem_a_ser_criada # toda vez q chamar no localhost 3333, dentro do docker, será buscada a porta 3333
+```
+
+```shell
+docker ps
+```
+
+**acessando o container**:
+```shell
+docker exec -it container_id /bin/bash # cairá no workdir
+```
+
+
+### docker-compose
+
+- Orquestrador de container, define os serviços necessários para rodar a aplicação
+
+`docker-compose.yml`
+
+```yml
+version: "3.7" # versão do compose
+
+services: 
+  app: # nome do serviço
+    build: . # diretório local
+    container_name: rentx # nome do container
+    ports: 
+      - 3333:3333 # acessando a 3333, será feito o mapeamento da porta 3333 do container
+    volumes:
+      - .:/usr/app # como se fosse o workdir, pegando tudo q está na aplicação e jogando pra /usr/app
+```
+
+**Rodando o compose**
+
+```shell 
+docker-compose up
+```
+
+```shell 
+docker-compose up -d # roda em background
+```
+
+```shell
+docker logs container_name -f
+```
+
+```shell
+docker-compose stop # para o container
+```
+
+```shell
+docker-compose start # inicia o container
+```
+
+```shell
+docker-compose down # remove o container
+```
