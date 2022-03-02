@@ -467,3 +467,27 @@ app.use(
 ```shell
 yarn add express-async-errors # o express não sabe lidar com throws
 ```
+
+
+### Subindo Avatar
+
+> Como user não é tipado na request, pelo express, precisamos criar um arquivo tipando user
+
+**ensureAuthenticated**:
+```ts
+request.user = {
+  id: user_id,
+};
+```
+
+*src/@types/express/index.d.ts*:
+```ts
+declare namespace Express {
+  // eslint-disable-next-line @typescript-eslint/naming-convention 
+  export interface Request { // A regra do eslint foi desabilitada, clicando em quickfix add to this line
+    user: {
+      id: string;
+    };
+  }
+}
+```
