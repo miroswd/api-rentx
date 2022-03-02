@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 // o service não deve conhecer o request, ele precisa só dos dados
 
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
@@ -12,8 +13,12 @@ interface IRequest {
  * [x] - Alterar o retorno de erro
  * [x] - Acessar o repositorio
  */
+@injectable()
 class CreateCategoryUseCase {
-  constructor(private categoriesRepository: ICategoriesRepository) {}
+  constructor(
+    @inject("CategoriesRepository") // Será buscado no container qual classe é referenciada por esse nome
+    private categoriesRepository: ICategoriesRepository
+  ) {}
 
   async execute({ name, description }: IRequest): Promise<void> {
     // const categoriesRepository = new CategoriesRepository();
