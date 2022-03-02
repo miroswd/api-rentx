@@ -76,13 +76,14 @@ yarn add -D ts-node-dev
 
 ## SOLID
 
-- Conceito de código limpo
+> Conceito de código limpo
 
-S -> SRP - Single Responsability Principle
-O -> OCP - Open-Closed Principle
-L -> LSP - Liskov Substitution Principle
-I -> ISP - Interface Segregation Principle 
-D -> DIP - Dependency Inversion Principle
+
+- S -> SRP - Single Responsability Principle
+- O -> OCP - Open-Closed Principle
+- L -> LSP - Liskov Substitution Principle
+- I -> ISP - Interface Segregation Principle 
+- D -> DIP - Dependency Inversion Principle
 
 ### Single Responsability Principle
 
@@ -137,7 +138,7 @@ class CreateCategoryService {
 
 ### Liskov Substitution Principle
 
-- Permitir que as partes do programa seja substituído sem que tenha impacto
+- Permitir que as partes do programa sejam substituídos sem que gere impacto na aplicação
 
 
 ```ts
@@ -423,4 +424,19 @@ yarn typeorm migration:run # rodar as migrations
 
 ```shell
 yarn typeorm migration:revert # reverter a última migration
+```
+
+### TSyringe
+
+- Ferramenta para ajudar na inversão de dependências
+- Facilitador de injeção de dependências
+
+```shell
+yarn add tsyringe
+```
+
+
+```ts
+// container.registerSingleto<Interface>("nome do container", classe que será chamada)
+container.registerSingleton<ICategoriesRepository>("", CategoriesRepository);
 ```
