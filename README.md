@@ -398,6 +398,7 @@ yarn add typeorm reflect-metadata pg
   "username":"docker",
   "password":"database_ignite",
   "database":"rentx",
+  "entities": ["src/modules/**/entities/*.ts", "./build/src/modules/**/entities/*.js"], // https://stackoverflow.com/questions/65336801/repositorynotfounderror-no-repository-for-user-was-found-looks-like-this-ent
   "migrations":["./src/database/migrations/*.ts"], // onde q estão as migrations para serem rodadas
   "cli": {
     "migrationsDir":"./src/database/migrations" // onde as migrations serão salvas
