@@ -440,3 +440,30 @@ yarn add tsyringe
 // container.registerSingleto<Interface>("nome do container", classe que será chamada)
 container.registerSingleton<ICategoriesRepository>("", CategoriesRepository);
 ```
+
+### Tratamento de exceções
+
+**server.ts**:
+```ts
+// se o erro for mapeado, ele cairá no if, caso contrário, será um erro do sistema
+app.use(
+  (err: Error, request: Request, response: Response, next: NextFunction) => {
+    if (err instanceof AppError) {
+      return response.status(err.status).json({
+        message: err.message,
+      });
+    }
+
+    return response.status(500).json({
+      status: "error",
+      message: `Internal server error - ${err.message}`,
+    });
+  }
+);
+```
+
+- Necessário instalar uma lib para conseguir passar os erros pra frente
+
+```shell
+yarn add express-async-errors # o express não sabe lidar com throws
+```

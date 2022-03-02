@@ -1,8 +1,9 @@
 import { inject, injectable } from "tsyringe";
-// o service não deve conhecer o request, ele precisa só dos dados
 
+import { AppError } from "../../../../errors/AppError";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
+// o service não deve conhecer o request, ele precisa só dos dados
 interface IRequest {
   name: string;
   description: string;
@@ -33,7 +34,7 @@ class CreateCategoryUseCase {
       //   });
       // }
 
-      throw new Error("Category already exists"); // lançado pra quem fez a requisição
+      throw new AppError("Category already exists"); // lançado pra quem fez a requisição
     }
 
     this.categoriesRepository.create({ name, description });
