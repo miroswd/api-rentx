@@ -339,3 +339,87 @@ docker-compose start # inicia o container
 ```shell
 docker-compose down # remove o container
 ```
+
+
+## Banco de dados
+
+### Usando driver nativo do banco
+
+```shell
+npm i pg # driver do postgres
+```
+
+**problema de usar dessa forma**:
+
+- Pra cada banco que fossemos usar, teríamos q instalar o nosso driver
+
+- Por exemplo, a forma de fazer uma query em postgres pode ser diferente do MySQL, o que seria mais cansativo de dar manutenção
+
+### Query builder
+
+`Knex.js`
+
+- Mistura o SQL puro com js
+
+- Precisa instalar os drivers nativos, mas possui um padrão para as queries
+
+### ORMs
+
+Model <-> ORM <-> Banco de dados
+
+- Pega o código em js e converte pra uma maneira que o banco de dados entende
+
+
+## Using TypeORM
+
+Search Installation [Installation](https://typeorm.io/#/)
+
+```shell
+yarn add typeorm reflect-metadata pg
+```
+
+**tsconfig**
+```json
+"emitDecoratorMetadata": true,
+"experimentalDecorators": true,
+```
+
+
+### Criando conexão
+
+- Dentro de `src`, criar a pasta `database`
+- Criar o arquivo ormconfig.json
+
+```js
+{
+  "type": "postgres",
+  "port":5432,
+  "host": "localhost",
+  "username":"docker",
+  "password":"database_ignite",
+  "database":"rentx",
+  "migrations":["./src/database/migrations/*.ts"], // onde q estão as migrations para serem rodadas
+  "cli": {
+    "migrationsDir":"./src/database/migrations" // onde as migrations serão salvas
+  }
+} 
+```
+
+### Migrations
+
+**incluir script no package**
+```json
+"typeorm":"ts-node-dev ./node_modules/typeorm/cli"
+```
+
+```shell
+yarn typeorm migration:create -n CreateCategory
+```
+
+```shell
+yarn typeorm migration:run # rodar as migrations
+```
+
+```shell
+yarn typeorm migration:revert # reverter a última migration
+```
