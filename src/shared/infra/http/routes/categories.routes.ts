@@ -1,11 +1,11 @@
 import { Router } from "express";
-// import { v4 as uuidv4 } from "uuid";
-
 import multer from "multer";
 
-import { CreateCategoryController } from "../modules/cars/useCases/createCategory/CreateCategoryController";
-import { ImportCategoryController } from "../modules/cars/useCases/importCategory/ImportCategoryController";
-import { ListCategoriesController } from "../modules/cars/useCases/listCategories/ListCategoriesController";
+import { CreateCategoryController } from "@modules/cars/useCases/createCategory/CreateCategoryController";
+import { ImportCategoryController } from "@modules/cars/useCases/importCategory/ImportCategoryController";
+import { ListCategoriesController } from "@modules/cars/useCases/listCategories/ListCategoriesController";
+// import { v4 as uuidv4 } from "uuid";
+
 // import { PostgresCategoriesRepository } from "../repositories/PostgresCategoriesRepository";
 
 const categoriesRoutes = Router();
