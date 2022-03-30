@@ -491,3 +491,93 @@ declare namespace Express {
   }
 }
 ```
+
+## Testes
+> usando o jest
+
+```bash
+yarn add jest && yarn add @types/jest
+```
+
+```bash
+yarn jest --init
+```
+
+**preset ṕra trabalhar com jest e ts**:
+```bash
+yarn add ts-jest -D
+```
+
+*jest.config.ts*:
+```ts
+// Stop running tests after `n` failures
+bail: true,
+// A preset that is used as a base for Jest's configuration
+preset: 'ts-jest',
+// The glob patterns Jest uses to detect test files
+testMatch: ["**/*.spec.ts"],
+```
+_____
+- Como funciona o teste?
+: É a comparação do resultado q se espera do teste com o real resultado da requisição
+
+____
+```ts
+describe() // serve para agrupar os testes
+beforeEach(() => {}) // antes de determinado teste, roda uma função
+expect(async () => {
+      const category: IRequest = {
+        name: "Category Test",
+        description: "Category description test",
+      };
+
+      await createCategoryUseCase.execute(category);
+      await createCategoryUseCase.execute(category);
+    }).rejects.toBeInstanceOf(AppError); // espera-se que dê erro, pois não pode ter 2 categoruas com o mesmo nome. O erro precisa ser uma instância de apperror
+```
+
+- Os testes não devem conectar com o banco, para contornar isso, podemos utilizar as interfaces criadas e criar nosso próprio repositório
+
+- Os testes tmb devem seguir o fluxo natural da aplicação, por exemplo: pra gerar o jwt, é necessário q o usuário exista na base de dados e ele informe as credencias válidas
+
+### Imports
+
+> Ao invés de acessar a pasta através de `../`, agora utilizamos `@diretorio`
+
+*tsconfig.json*:
+```json
+ "baseUrl": "./src",
+ "paths": {
+   "@modules/*": ["modules/*"],
+   "@config/*": ["config/*"],
+   "@shared/*": ["shared/*"],
+   "@errors/*": ["errors/*"],
+ },                    
+```
+- feito isso, precisa dar um reload na aplicação
+
+- Impedindo q jogue nossos repositórios pra cima das dependências
+*eslint.json*  (antes estava como `/^@shared/`)
+```json
+"import-helpers/order-imports": [
+    "warn",
+    {
+      "newlinesBetween": "always",
+      "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
+      "alphabetize": { "order": "asc", "ignoreCase": true }
+    }
+  ],
+```
+
+
+```bash
+yarn add tsconfig-paths -D # responsável por fazer a tradução dos imports com @, precisa passar no script de dev tmb
+```
+
+```json
+"scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "test": "jest"
+  },
+```
