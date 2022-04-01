@@ -654,3 +654,22 @@ yarn add tsconfig-paths -D # responsável por fazer a tradução dos imports com
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para para o mesmo usuário
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para para o mesmo carro
 
+
+```js
+// forçando tipo das variáveis
+const cars = await listAvailableCarsUseCase.execute({
+      brand: brand as string,
+      category_id: category_id as string,
+      name: name as string,
+    });
+```
+
+### Usando queryBuilder do typeORM
+
+```js
+const carsQuery = await this.repository
+      .createQueryBuilder("c")// c é um alias referenciando cars
+      .where("available = :available", {
+        available: true,
+      }); // :available é o parâmetro que irá receber
+```
