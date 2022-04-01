@@ -673,3 +673,36 @@ const carsQuery = await this.repository
         available: true,
       }); // :available é o parâmetro que irá receber
 ```
+
+
+## SuperTest
+- Teste de integração
+
+> cria basicamente um servidor http
+
+```bash
+yarn add supertest && yarn add @types/supertest -D
+```
+
+- separando app de server (criando um arquivo q da o listen do app), pra testar sem ter q iniciar o servidor
+
+- Necessário criar uma nova estrutura de banco de dados
+
+Na query do postbird ou dbeaver: 
+
+```sql
+create database rentx_test;
+```
+
+- passando a env no package.json
+
+```json
+{
+  "test": "NODE_ENV=test jest  --detectOpenHandles",
+}
+```
+
+**beforeEach vs beforeAll** 
+
+- beforeEach zera antes de cada teste
+- beforeAll monta uma vez só e utiliza pra todos os testes
