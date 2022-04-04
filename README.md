@@ -702,7 +702,20 @@ create database rentx_test;
 }
 ```
 
+```json
+// detectOpenHandles: detecta se tem teste em aberto
+// runInBand: evitando dados duplicados nos testes, rodando um teste de cada vez
+
+"test": "NODE_ENV=test jest --detectOpenHandles --runInBand",
+```
+
 **beforeEach vs beforeAll** 
 
 - beforeEach zera antes de cada teste
 - beforeAll monta uma vez só e utiliza pra todos os testes
+
+
+### Sequência de desenvolvimento
+
+> useCase > IRepository > Implementação (Repository)
+
