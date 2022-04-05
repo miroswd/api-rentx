@@ -722,3 +722,15 @@ create database rentx_test;
 
 ### Refresh token
 > Criar uma tabela de tokens para o usuário
+
+
+### forgot password
+
+> O EtherealMailProvider precisa ser injetado assim q a aplicação é iniciada, pra conseguir criar o client antes de chamar o sendMail
+
+```ts
+container.registerInstance<IMailProvider>(
+  "EtherealMailProvider",
+  new EtherealMailProvider()
+);
+```
