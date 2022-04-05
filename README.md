@@ -719,3 +719,6 @@ create database rentx_test;
 
 > useCase > IRepository > Implementação (Repository)
 
+
+### Refresh token
+> Criar uma tabela de tokens para o usuário
