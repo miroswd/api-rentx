@@ -734,3 +734,22 @@ container.registerInstance<IMailProvider>(
   new EtherealMailProvider()
 );
 ```
+
+> "Jest has detected the following 2 open handles potentially keeping Jest from exiting"
+```json
+"test": "NODE_ENV=test jest --runInBand --forceExit"
+```
+
+```ts
+ // spy do jest -> verifica se algum método da classe foi chamado
+    const sendMail = jest.spyOn(mailProvider, "sendMail");
+
+    await usersRepositoryInMemory.create({
+      driver_license: "123456",
+      email: "email@user.com",
+      name: "John Doe",
+      password: "1234",
+    });
+
+    expect(sendMail).toHaveBeenCalled();
+```
