@@ -753,3 +753,18 @@ container.registerInstance<IMailProvider>(
 
     expect(sendMail).toHaveBeenCalled();
 ```
+
+
+### Code Coverage
+
+> jest.config.ts
+
+```js
+{
+  collectCoverage: true,
+  collectCoverageFrom: ["<rootDir>/src/modules/**/useCases/**/*.ts"], // arquivos que serão mapeados 
+  coverageDirectory: "coverage" // pasta com todas as informações do coverage
+  coverageReporters: [ "text-summary", "lcov"],
+
+}
+```
