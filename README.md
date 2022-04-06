@@ -768,3 +768,13 @@ container.registerInstance<IMailProvider>(
 
 }
 ```
+
+
+### Mapper
+> Quando a gente quer transformar o objeto q temos em um objeto mais adequado pro usuário (tirando senha, tirando informações desnecessárias)
+
+### Manipulando entidade
+
+```bash
+yarn add class-transformer
+```
