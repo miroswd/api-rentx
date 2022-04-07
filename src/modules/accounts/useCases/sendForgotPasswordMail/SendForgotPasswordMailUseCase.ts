@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
-import { IDateProvider } from "@shared/container/providers/IDateProvider";
+import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { IMailProvider } from "@shared/container/providers/MailProvider/IMailProvider";
 import { AppError } from "@shared/errors/AppError";
 
@@ -20,7 +20,7 @@ class SendForgotPasswordMailUseCase {
     @inject("DayjsDateProvider")
     private dateProvider: IDateProvider,
 
-    @inject("EtherealMailProvider")
+    @inject("MailProvider")
     private mailProvider: IMailProvider
   ) {}
 

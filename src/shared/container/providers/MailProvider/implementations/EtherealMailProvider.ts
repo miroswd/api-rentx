@@ -1,5 +1,5 @@
 import fs from "fs";
-import handlebars, { template } from "handlebars";
+import handlebars from "handlebars";
 import nodemailer, { Transporter } from "nodemailer";
 import { injectable } from "tsyringe";
 
