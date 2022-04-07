@@ -778,3 +778,9 @@ container.registerInstance<IMailProvider>(
 ```bash
 yarn add class-transformer
 ```
+
+### Redis
+
+```bash
+ docker run --name redis-rentx -p 6379:6379 -d -t redis:alpine
+```
